@@ -1,0 +1,103 @@
+# PecoLabo Corporate Site - Apache Configuration
+# セキュリティとパフォーマンスの最適化
+
+# HTTPS強制リダイレクト
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# セキュリティヘッダー
+<IfModule mod_headers.c>
+    # XSS保護
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # コンテンツタイプスニッフィング防止
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # フレーム埋め込み防止
+    Header always set X-Frame-Options "DENY"
+    
+    # リファラーポリシー
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # コンテンツセキュリティポリシー
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';"
+    
+    # Strict-Transport-Security (HSTS)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # 権限ポリシー
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# キャッシュ設定
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # 画像ファイル
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    
+    # CSS/JSファイル
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # フォントファイル
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    
+    # HTMLファイル
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Gzip圧縮
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ファイルアクセス制限
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".gitignore">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "package.json">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "gulpfile.js">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# エラーページ
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# ディレクトリリスティング無効化
+Options -Indexes
+
+# サーバー情報の隠蔽
+ServerTokens Prod
+ServerSignature Off

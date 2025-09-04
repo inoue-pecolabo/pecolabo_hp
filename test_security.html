@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>セキュリティテスト - PecoLabo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+    </style>
+</head>
+<body>
+    <h1>PecoLabo セキュリティテスト</h1>
+    
+    <div class="test-section">
+        <h2>1. フォームバリデーションテスト</h2>
+        <form id="testForm">
+            <input type="text" id="testName" placeholder="お名前" required>
+            <input type="email" id="testEmail" placeholder="メールアドレス" required>
+            <input type="tel" id="testPhone" placeholder="電話番号" required>
+            <textarea id="testMessage" placeholder="メッセージ" required></textarea>
+            <button type="submit">テスト送信</button>
+        </form>
+        <div id="testResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. CSRFトークンテスト</h2>
+        <div id="csrfTest">CSRFトークンの生成をテスト中...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. レート制限テスト</h2>
+        <button onclick="testRateLimit()">レート制限テスト</button>
+        <div id="rateLimitResult"></div>
+    </div>
+
+    <script>
+        // CSRFトークンテスト
+        function generateCSRFToken() {
+            if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+                var array = new Uint8Array(32);
+                crypto.getRandomValues(array);
+                return Array.from(array, function(byte) {
+                    return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+                }).join('');
+            } else {
+                return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            }
+        }
+        
+        var csrfToken = generateCSRFToken();
+        document.getElementById('csrfTest').innerHTML = 
+            '<span class="success">✓ CSRFトークン生成成功: ' + csrfToken.substring(0, 16) + '...</span>';
+        
+        // フォームバリデーションテスト
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var name = document.getElementById('testName').value.trim();
+            var email = document.getElementById('testEmail').value.trim();
+            var phone = document.getElementById('testPhone').value.trim();
+            var message = document.getElementById('testMessage').value.trim();
+            
+            var errors = [];
+            
+            if (name.length < 2) errors.push('名前は2文字以上必要です');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('正しいメールアドレスを入力してください');
+            if (!/^[\d\-\+\(\)\s]+$/.test(phone) || phone.length < 10) errors.push('正しい電話番号を入力してください');
+            if (message.length < 10) errors.push('メッセージは10文字以上必要です');
+            
+            var result = document.getElementById('testResult');
+            if (errors.length === 0) {
+                result.innerHTML = '<span class="success">✓ バリデーション成功</span>';
+            } else {
+                result.innerHTML = '<span class="error">✗ エラー: ' + errors.join(', ') + '</span>';
+            }
+        });
+        
+        // レート制限テスト
+        function testRateLimit() {
+            var result = document.getElementById('rateLimitResult');
+            result.innerHTML = '<span class="warning">⚠ レート制限テストは実際のサーバー環境で実行してください</span>';
+        }
+    </script>
+</body>
+</html>

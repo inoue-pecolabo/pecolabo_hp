@@ -4,13 +4,13 @@
 const autoprefixer = require("gulp-autoprefixer");
 const browsersync = require("browser-sync").create();
 const cleanCSS = require("gulp-clean-css");
-const del = require("del");
+const { deleteAsync } = require("del");
 const gulp = require("gulp");
 const header = require("gulp-header");
 const merge = require("merge-stream");
 const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
-const sass = require("gulp-sass");
+const sass = require("gulp-sass")(require("sass"));
 const uglify = require("gulp-uglify");
 
 // Load package.json for banner
@@ -44,7 +44,7 @@ function browserSyncReload(done) {
 
 // Clean vendor
 function clean() {
-  return del(["./vendor/"]);
+  return deleteAsync(["./vendor/"]);
 }
 
 // Bring third party dependencies from node_modules into vendor directory

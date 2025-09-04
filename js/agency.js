@@ -1,3 +1,5 @@
+"use strict"; // Start of use strict
+
 (function($) {
   "use strict"; // Start of use strict
 
@@ -17,7 +19,13 @@
 
   // Closes responsive menu when a scroll trigger link is clicked
   $('.js-scroll-trigger').click(function() {
-    $('.navbar-collapse').collapse('hide');
+    var navbarCollapse = document.getElementById('navbarResponsive');
+    if (navbarCollapse) {
+      var bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+      });
+      bsCollapse.hide();
+    }
   });
 
   // Activate scrollspy to add active class to navbar items on scroll

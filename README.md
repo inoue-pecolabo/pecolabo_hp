@@ -1,69 +1,212 @@
-# [Start Bootstrap - Agency](https://startbootstrap.com/template-overviews/agency/)
+# PecoLabo Corporate Site
 
-[Agency](https://startbootstrap.com/template-overviews/agency/) is a one page agency portfolio theme for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/). This theme features several content sections, a responsive portfolio grid with hover effects, full page portfolio item modals, a responsive timeline, and a working PHP contact form.
+PecoLabo合同会社のコーポレートサイトです。IT事業、美容事業、物販事業を通じて、もっと自由に自分らしく生きる選択肢を提供します。
 
-## Preview
+## 🚀 特徴
 
-[![Agency Preview](https://startbootstrap.com/assets/img/screenshots/themes/agency.png)](https://blackrockdigital.github.io/startbootstrap-agency/)
+- **セキュアな設計**: CSRF対策、XSS対策、レート制限を実装
+- **レスポンシブデザイン**: モバイル・タブレット・デスクトップ対応
+- **高速パフォーマンス**: 最適化されたCSS/JS、画像圧縮
+- **SEO対応**: メタタグ、構造化データ、サイトマップ
+- **アクセシビリティ**: WCAG 2.1準拠の設計
 
-**[View Live Preview](https://blackrockdigital.github.io/startbootstrap-agency/)**
+## 📋 技術スタック
 
-## Status
+- **フロントエンド**: HTML5, CSS3, JavaScript (ES6+)
+- **フレームワーク**: Bootstrap 5.3.2
+- **アイコン**: FontAwesome 6.5.1
+- **ビルドツール**: Node.js, npm
+- **バックエンド**: PHP 8.1+ (お問い合わせフォーム)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-agency/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/startbootstrap-agency.svg)](https://www.npmjs.com/package/startbootstrap-agency)
-[![Build Status](https://travis-ci.org/BlackrockDigital/startbootstrap-agency.svg?branch=master)](https://travis-ci.org/BlackrockDigital/startbootstrap-agency)
-[![dependencies Status](https://david-dm.org/BlackrockDigital/startbootstrap-agency/status.svg)](https://david-dm.org/BlackrockDigital/startbootstrap-agency)
-[![devDependencies Status](https://david-dm.org/BlackrockDigital/startbootstrap-agency/dev-status.svg)](https://david-dm.org/BlackrockDigital/startbootstrap-agency?type=dev)
+## 🛠️ セットアップ
 
-## Download and Installation
+### 前提条件
 
-To begin using this template, choose one of the following options to get started:
-* [Download the latest release on Start Bootstrap](https://startbootstrap.com/template-overviews/agency/)
-* Install via npm: `npm i startbootstrap-agency`
-* Clone the repo: `git clone https://github.com/BlackrockDigital/startbootstrap-agency.git`
-* [Fork, Clone, or Download on GitHub](https://github.com/BlackrockDigital/startbootstrap-agency)
+- Node.js 16.0.0以上
+- npm 8.0.0以上
+- PHP 8.1以上（お問い合わせフォーム用）
 
-## Usage
+### インストール
 
-### Basic Usage
+1. リポジトリをクローン
+```bash
+git clone https://github.com/pecolabo/corporate-site.git
+cd corporate-site
+```
 
-After downloading, simply edit the HTML and CSS files included with the template in your favorite text editor to make changes. These are the only files you need to worry about, you can ignore everything else! To preview the changes you make to the code, you can open the `index.html` file in your web browser.
+2. 依存関係をインストール
+```bash
+npm install
+```
 
-### Advanced Usage
+3. 環境変数を設定
+```bash
+cp .env.example .env
+# .envファイルを編集して適切な値を設定
+```
 
-After installation, run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
+4. ビルドを実行
+```bash
+npm run build
+```
 
-#### Gulp Tasks
+## 🚀 開発
 
-- `gulp` the default task that builds everything
-- `gulp watch` browserSync opens the project in your default browser and live reloads when changes are made
-- `gulp css` compiles SCSS files into CSS and minifies the compiled CSS
-- `gulp js` minifies the themes JS file
-- `gulp vendor` copies dependencies from node_modules to the vendor directory
+### 開発サーバーの起動
 
-You must have npm installed globally in order to use this build environment.
+```bash
+npm start
+```
 
-## Bugs and Issues
+### ビルドのみ
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/BlackrockDigital/startbootstrap-agency/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/agency/).
+```bash
+npm run build
+```
 
-## About
+### 最適化の実行
 
-Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
+```bash
+node optimize.js
+```
 
-* https://startbootstrap.com
-* https://twitter.com/SBootstrap
+### セキュリティテスト
 
-Start Bootstrap was created by and is maintained by **[David Miller](http://davidmiller.io/)**, Owner of [Blackrock Digital](http://blackrockdigital.io/).
+```bash
+open test_security.html
+```
 
-* http://davidmiller.io
-* https://twitter.com/davidmillerskt
-* https://github.com/davidtmiller
+## 📁 プロジェクト構造
 
-Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
+```
+pecolabo_corporatesite/
+├── css/                 # コンパイルされたCSSファイル
+├── js/                  # JavaScriptファイル
+├── img/                 # 画像ファイル
+├── scss/                # SCSSソースファイル
+├── vendor/              # 外部ライブラリ
+├── mail/                # PHPメール処理
+├── index.html           # メインページ
+├── package.json         # 依存関係
+├── gulpfile.js          # Gulp設定
+├── build.js             # カスタムビルドスクリプト
+├── optimize.js          # 最適化スクリプト
+├── deploy.sh            # デプロイスクリプト
+├── .env                 # 環境変数
+├── .htaccess            # Apache設定
+└── nginx.conf           # Nginx設定
+```
 
-## Copyright and License
+## 🔒 セキュリティ機能
 
-Copyright 2013-2019 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-agency/blob/gh-pages/LICENSE) license.
-# pecolabo_hp
+### 実装済みセキュリティ対策
+
+- **CSRF保護**: トークンベースの保護
+- **XSS対策**: 入力値のサニタイズ
+- **レート制限**: 5分間に3回までの送信制限
+- **入力検証**: クライアント・サーバーサイド両方で検証
+- **セキュリティヘッダー**: X-Frame-Options, CSP等
+
+### セキュリティヘッダー
+
+```apache
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=31536000
+Content-Security-Policy: default-src 'self'
+```
+
+## 🚀 デプロイメント
+
+### 本番環境へのデプロイ
+
+```bash
+./deploy.sh
+```
+
+### 手動デプロイ
+
+1. ファイルをWebサーバーにアップロード
+2. SSL証明書を設定
+3. ドメインのDNS設定
+4. 環境変数の設定
+5. お問い合わせフォームのテスト
+
+### サーバー設定
+
+#### Apache (.htaccess)
+- HTTPS強制リダイ���クト
+- セキュリティヘッダー
+- キャッシュ設定
+- Gzip圧縮
+
+#### Nginx (nginx.conf)
+- SSL/TLS設定
+- セキュリティヘッダー
+- 静的ファイルキャッシュ
+- PHP-FPM設定
+
+## 📊 パフォーマンス
+
+### 最適化済み項目
+
+- CSS/JSのミニファイ
+- 画像の最適化
+- Gzip圧縮
+- ブラウザキャッシュ
+- CDN対応
+
+### パフォーマンス指標
+
+- **Lighthouse Score**: 90+ (目標)
+- **First Contentful Paint**: <2秒
+- **Largest Contentful Paint**: <4秒
+- **Cumulative Layout Shift**: <0.1
+
+## 🧪 テスト
+
+### セキュリティテスト
+
+```bash
+# セキュリティテストページを開く
+open test_security.html
+```
+
+### 手動テスト項目
+
+- [ ] フォームバリデーション
+- [ ] CSRFトークン生成
+- [ ] レート制限
+- [ ] レスポンシブデザイン
+- [ ] アクセシビリティ
+
+## 📝 ライセンス
+
+MIT License - 詳細は[LICENSE](LICENSE)ファイルを参照
+
+## 👥 貢献
+
+1. このリポジトリをフォーク
+2. フィーチャーブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更をコミット (`git commit -m 'Add amazing feature'`)
+4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
+5. プルリクエストを作成
+
+## 📞 サポート
+
+- **Email**: info@pecolabo.com
+- **Website**: https://pecolabo.com
+- **Issues**: [GitHub Issues](https://github.com/pecolabo/corporate-site/issues)
+
+## 🔄 更新履歴
+
+### v1.0.0 (2024-01-XX)
+- 初回リリース
+- セキュリティ機能の実装
+- パフォーマンス最適化
+- レスポンシブデザイン対応
+
+---
+
+**PecoLabo合同会社** - もっと自由に自分らしく生きる選択肢を。
